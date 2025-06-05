@@ -12,10 +12,6 @@ let highScore = 0;
 
 function checkGuess() {
   const guess = Number(document.querySelector('.guess').value);
-}
-
-function checkGuess() {
-  const guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
     document.querySelector('.message').textContent = '⛔ No Number!';
@@ -42,7 +38,6 @@ function checkGuess() {
   }
 }
 // add Event Listerners
-
 document.querySelector('.check').addEventListener('click', checkGuess);
 
 document.addEventListener('keydown', function (event) {
