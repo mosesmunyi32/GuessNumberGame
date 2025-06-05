@@ -10,20 +10,18 @@ let score = 20; //state variable since they define the state of an application
 
 let highScore = 0;
 
-document.querySelector('.check').addEventListener('click', () => {
+function checkGuess() {
   const guess = Number(document.querySelector('.guess').value);
-  console.log(guess, typeof guess);
+}
 
-  //When there is no Input
+function checkGuess() {
+  const guess = Number(document.querySelector('.guess').value);
+
   if (!guess) {
     document.querySelector('.message').textContent = '⛔ No Number!';
-
-    // When the player Wins
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct Number!';
-
     document.querySelector('.number').textContent = secretNumber;
-
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
 
@@ -31,21 +29,10 @@ document.querySelector('.check').addEventListener('click', () => {
       highScore = score;
       document.querySelector('.highscore').textContent = highScore;
     }
-    //When the Guess is too High
-  } else if (guess > secretNumber) {
+  } else {
     if (score > 1) {
-      document.querySelector('.message').textContent = '📈 Number Too High!';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent = ' 👎 You lost the Game';
-      document.querySelector('.score').textContent = 0;
-    }
-
-    //WHen the Guess is too low
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = '📉 Number Too Low!';
+      document.querySelector('.message').textContent =
+        guess > secretNumber ? '📈 Number Too High!' : '📉 Number Too Low!';
       score--;
       document.querySelector('.score').textContent = score;
     } else {
@@ -53,6 +40,13 @@ document.querySelector('.check').addEventListener('click', () => {
       document.querySelector('.score').textContent = 0;
     }
   }
+}
+// add Event Listerners
+
+document.querySelector('.check').addEventListener('click', checkGuess);
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') checkGuess();
 });
 
 //Reseting using Again! Button
